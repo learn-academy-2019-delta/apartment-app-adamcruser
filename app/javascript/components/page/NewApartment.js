@@ -6,61 +6,61 @@ class NewApartment extends React.Component {
 constructor(props){
   super(props)
   this.state = {
-    form: {
+    info: {
       street: "",
       city: ""
     }
   }
 }
 
-onChange= (e) =>{
-  const{ form } = this.state
-  const{ name, value } = e.target
-  form[name] = value
-  this.setState({form})
-}
+    onChange= (i) =>{
+      const{ info } = this.state
+      const{ name, value } = i.target
+      info[name] = value
+      this.setState({info})
+    }
 
-localSubmit = () =>{
-  const{ onSubmit } = this.props
-  const{ form } = this.state
-  onSubmit(form)
-  .then(()=>{
-    this.setState({createSuccess: true})
-  })
-}
-render () {
-  const{
-    street,
-    city,
-    createSuccess
-  } = this.state
-  return (
-    <React.Fragment>
-      { createSuccess && <Redirect to="/"/> }
-      <h1>New Apartment</h1>
-      <div>
-        <label>Street</label>
-        <input
-          name="street"
-          value={street}
-          onChange = { this.onChange }
-          type='text'
-        />
-      </div>
-      <div>
-        <label>City</label>
-        <input
-          name="city"
-          value={city}
-          onChange = { this.onChange }
-          type='text'
-        />
-      </div>
+    buttonSubmit = () =>{
+      const{ onSubmit } = this.props
+      const{ info } = this.state
+      onSubmit(info)
+      .then(()=>{
+        this.setState({createSuccess: true})
+      })
+    }
+    render () {
+      const{
+        street,
+        city,
+        createSuccess
+      } = this.state
+      return (
+        <React.Fragment>
+          { createSuccess && <Redirect to="/"/> }
+          <h1>New Apartment</h1>
+          <div>
+            <label>Street</label>
+            <input
+              name="street"
+              value={street}
+              onChange = { this.onChange }
+              type='text'
+            />
+          </div>
+          <div>
+            <label>City</label>
+            <input
+              name="city"
+              value={city}
+              onChange = { this.onChange }
+              type='text'
+            />
+          </div>
 
-      <button onClick={this.localSubmit} >Submit</button>
-    </React.Fragment>
-  );
-}
-}
+          <button onClick={this.buttonSubmit} >Submit</button>
+        </React.Fragment>
+      );
+    }
+    }
 
 export default NewApartment

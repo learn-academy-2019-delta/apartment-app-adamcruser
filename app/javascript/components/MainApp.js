@@ -9,6 +9,7 @@ import {
 
 import Home from './page/Home'
 import NewApartment from './page/NewApartment'
+import EditApartment from './page/EditApartment'
 
 class MainApp extends React.Component {
   constructor(props){
@@ -30,13 +31,28 @@ class MainApp extends React.Component {
     })
   }
 
-  createApartment = (attrs) =>{
+  showApartment = (shown) => {
+     return fetch("/apartments",{
+       method: 'GET',
+       headers:{
+         "Content-Type": "application/json"
+        },
+        body: Json.stringify({apartment: shown})
+      })
+      .then(response => {
+          if(response.status === 201){
+              this.getApartments()
+          }
+      })
+  }
+
+  createApartment = (created) =>{
     return fetch("/apartments",{
       method: 'POST',
       headers:{
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({apartment: attrs})
+      body: JSON.stringify({apartment: created})
     })
     .then(response => {
       if(response.status === 201){
@@ -45,8 +61,8 @@ class MainApp extends React.Component {
     })
   }
 
-  editApartment = (id, attrs) => {
-    console.log("editing", id, attrs)
+  editApartment = (id, num) => {
+    console.log("editing", id, num)
   }
 
   deleteApartment = (id) =>{
@@ -113,7 +129,20 @@ class MainApp extends React.Component {
               )
             }}
           />
-
+          <Route
+           exact
+           path= "/apartments"
+           render={(props) => {
+               return(
+                   <Home
+                   {...props}
+                   currentUserId = {current_user_id}
+                   apartments = {apartments}
+                   deleteAction = {this.showApartment}
+                   />
+               )
+           }}
+           />
           {logged_in &&
             <Switch>
               <Route
