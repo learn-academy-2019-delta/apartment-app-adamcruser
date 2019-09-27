@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import {Redirect} from 'react-router-dom'
+import {Button, ButtonToolbar} from 'react-bootstrap'
 class EditApartment extends React.Component {
   constructor(props){
     super(props)
@@ -28,7 +29,7 @@ class EditApartment extends React.Component {
     const{apartmentUpdate} = this.state
     console.log(i.target.value)
     apartmentUpdate[i.target.name] = i.target.value
-    // this.setState({apartmentUpdate})
+    
   }
 
   buttonSubmit = () =>{
@@ -70,8 +71,9 @@ class EditApartment extends React.Component {
             type='text'
           />
         </div>
-
-        <button onClick={this.buttonSubmit} >Edit</button>
+        <ButtonToolbar>
+        <Button variant="primary" size="sm" onClick={this.buttonSubmit} >Edit</Button>
+        </ButtonToolbar>
 
         </React.Fragment>
     );

@@ -2,6 +2,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import {Redirect} from 'react-router-dom'
+import {Button, ButtonToolbar, Navbar, Nav, Form, FormControl} from 'react-bootstrap'
 class NewApartment extends React.Component {
 constructor(props){
   super(props)
@@ -45,6 +46,7 @@ constructor(props){
               value={street}
               onChange = { this.onChange }
               type='text'
+              placeholder= "Enter Street"
             />
           </div>
           <div>
@@ -54,10 +56,12 @@ constructor(props){
               value={city}
               onChange = { this.onChange }
               type='text'
+              placeholder= "Enter City"
             />
           </div>
-
-          <button onClick={this.buttonSubmit} >Submit</button>
+<ButtonToolbar>
+          <Button variant="primary" size="sm" onClick={this.buttonSubmit} >Submit</Button>
+</ButtonToolbar>
         </React.Fragment>
       );
     }

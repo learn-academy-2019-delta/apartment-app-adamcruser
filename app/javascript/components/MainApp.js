@@ -6,6 +6,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
+import {Navbar, Nav} from 'react-bootstrap'
 
 import Home from './page/Home'
 import NewApartment from './page/NewApartment'
@@ -113,14 +114,17 @@ class MainApp extends React.Component {
         }
 
         <Router>
+        <Navbar bg="dark" variant="dark">
           <div className="TopNav">
             <div>
               <Link to="/">Home</Link>
             </div>
             {logged_in &&
               <div>
+              <Nav.Link>
                 <Link to="/new-apartment" >New Apartment</Link>
                 <a href={sign_out_route}>Log Out</a>
+                </Nav.Link>
               </div>
             }
             {!logged_in &&
@@ -129,6 +133,7 @@ class MainApp extends React.Component {
               </div>
             }
           </div>
+          </Navbar>
           <Route
             exact
             path="/"
