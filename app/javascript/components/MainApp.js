@@ -62,8 +62,22 @@ class MainApp extends React.Component {
   }
 
   editApartment = (id, num) => {
-    console.log("editing", id, num)
+      fetch(`/apartments/${id}`,{
+          method: 'PATCH',
+          headers:{
+            "Content-Type": "application/json"
+        },
+          body: JSON.stringify({apartment: num})
+      })
+      .then(response => {
+          if(response.status === 200){
+              this.getApartments()
+          }
+      })
+      console.log("editing", id, num)
   }
+
+
 
   deleteApartment = (id) =>{
     return fetch(`/apartments/${id}`, {

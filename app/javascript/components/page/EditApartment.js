@@ -5,14 +5,14 @@ class EditApartment extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      apartmentId: null,
+      apartmentId: this.props.match.params.id,
       apartmentUpdate: {}
     }
 
   }
   componentDidMount(){
       fetch("/apartments/:id")
-      console.log(this.props.match);
+      console.log(this.props.match.params.id);
   }
 
   Updated(oldAppt){
@@ -25,16 +25,17 @@ class EditApartment extends React.Component {
   }
 
   onChange= (i) =>{
-    const{ info } = this.state
-    const{ name, value } = i.target
-    info[name] = value
-    this.setState({info})
+    const{apartmentUpdate} = this.state
+    console.log(i.target.value)
+    apartmentUpdate[i.target.name] = i.target.value
+    // this.setState({apartmentUpdate})
   }
 
   buttonSubmit = () =>{
     const{ onSubmit } = this.props
-    const{ info } = this.state
-    onSubmit(info)
+    const{ apartmentId, apartmentUpdate } = this.state
+    console.log(this.state);
+    onSubmit(apartmentId, apartmentUpdate)
     .then(()=>{
       this.setState({createSuccess: true})
     })

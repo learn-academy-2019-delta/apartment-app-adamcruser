@@ -10,7 +10,7 @@ class ApartmentsController < ApplicationController
     def show
         apartments = Apartment.all
         render json: apartments
-        
+
     end
 
     def create
@@ -18,6 +18,13 @@ class ApartmentsController < ApplicationController
          p apartment.errors.full_messages
         render json: apartment, status: 201
     end
+
+    def update
+        apartment = current_user.apartments.update apartment_params
+        p apartment
+        render json: apartment, status: 200
+    end
+
 
     def destroy
         apartment = current_user.apartments.find params[:id]
